@@ -1,0 +1,104 @@
+<?php
+session_start();
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Posts</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+
+<!--Change the href later, right now they do nothing-->
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#top">CyPin</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="inbox.php">Inbox</a></li>
+            <li><a href="#send_message">Send message</a></li>
+            <li><a href="#make_post">Make post</a></li>
+            <li>
+                <button class="btn btn-default navbar-btn" type="button" onclick="updatePosts()">Update posts</button>
+            </li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+            <form action="logout.php">
+                <li>
+                    <button type="submit" class="btn btn-danger navbar-btn">
+                        <span class="glyphicon glyphicon-log-out"> Logout</span>
+                    </button>
+                </li>
+            </form>
+        </ul>
+    </div>
+</nav>
+
+
+<div id="map"></div>
+    <script>
+      function initMap() {
+        var uluru = {lat: 42.0266, lng:  -93.6465};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 16,
+          center: uluru
+        });
+        var marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+
+        var marker2 = new google.maps.Marker({
+          position: {lat: 42.0666, lng:  -93.6465},
+          map: map
+        });
+        marker.onclick = function()
+        {
+            alert("HI");
+        }
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWaq6jBtPLKPAdW8Fgt4nko9TGTk_nWck&callback=initMap">
+    </script>
+
+
+
+
+
+
+
+
+
+
+<div class="container">
+    <h3>Make post:</h3>
+    <form id="make_post">
+        <input placeholder="Title" class="form-control" type="text" id="title" required>
+        <br>
+        <textarea placeholder="Description" class="form-control" rows="5" id="description" required></textarea>
+        <br>
+        <input type="submit" class="btn btn-success" value="Post">
+    </form>
+    <br><br>
+</div>
+
+
+<br>
+
+</body>
+</html>
+

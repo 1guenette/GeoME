@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   
+    <meta charset="UTF-8">
+    <title>Pin Page</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+    <style>
+       #map {
+        height: 600px;
+        width: 100%;
+       }
+    </style>
+
+  </head>
+  
+  <body>
+<script>
+    function updatePosts()
+    {
+        $.ajax({
+                type:"POST",
+                 url: "example.php",
+                data: { info: infoHere },
+                success: function(data,status) {
+                $("#display").html(data);
+                }
+                }); 
+
+    }
+    
+    function updateMap()
+    {
+        $.ajax({
+                type:"POST",
+                 url: "example.php",
+                data: { info: infoHere },
+                success: function(data,status) {
+                $("#display").html(data);
+                }
+                });
+
+    }
+</script>
+
+<!-- Navigation Bar-->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#top">CyPin</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="inbox.php">Inbox</a>
+                </li>
+                   
+                <li>
+                    <button class="btn btn-default navbar-btn" type="button" onclick="updatePosts()">Update posts</button>
+                </li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <form action="logout.php">
+                    <li>
+                        <button type="submit" class="btn btn-danger navbar-btn">
+                            <span class="glyphicon glyphicon-log-out"> Logout</span>
+                        </button>
+                    </li>
+                </form>
+            </ul>
+        </div>
+    </nav>
+
+
+<!-- MAP--> 
+    <script>
+      function initMap() {
+        var uluru = {lat: 42.0266, lng:  -93.6465};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 16,
+          center: uluru
+        });
+        var marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+
+        var marker2 = new google.maps.Marker({
+          position: {lat: 42.0666, lng:  -93.6465},
+          map: map
+        });
+        marker.onclick = function()
+        {
+            alert("HI");
+        }
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWaq6jBtPLKPAdW8Fgt4nko9TGTk_nWck&callback=initMap">
+    </script>
+    <!-- MAP DIV-->
+    <div id="map"></div>
+
+    
+    <!--Post-->
+    <div class="container">
+        <h3>Make post:</h3>
+        <form id="make_post">
+            <!--<input placeholder="Title" class="form-control" type="text" id="title" required>-->
+            <textarea placeholder="Description" class="form-control" rows="1" id="description"></textarea>
+            <input type="file" name="fileToUpload" id="fileToUpload">
+                       
+            <br>
+            
+            <a class="btn btn-info btn-lg" style="width: 200px"><span class="glyphicon glyphicon-camera"></span></a>
+            
+            <a class="btn btn-info btn-lg" style="width: 200px" ><input type="file" name="fileToUpload" id="fileToUpload" style="display:none;"><span class="glyphicon glyphicon-film"></span> Film</a>
+
+            <input type="file" id="selectedFile" style="display: name;" />
+            <input type="button" value="Browse" onclick="document.getElementById('selectedFile').click();" class="btn btn-info btn-lg"/>
+
+            
+            <br>
+            
+            <br>
+            <input type="submit" class="btn btn-success" value="Post">
+        </form>
+        <br><br>
+    </div>
+
+
+  
+
+
+  </body>
+</html>

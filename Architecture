@@ -1,0 +1,13 @@
+Architecture
+
+User
+[username][password]
+
+FriendList (each user)
+[username]
+
+Posts
+[username] [postLat] [postLong] [postPhotoID][postText]
+
+
+
